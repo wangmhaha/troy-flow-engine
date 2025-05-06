@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-27 15:03:16
  * @LastEditors: wangmin
- * @LastEditTime: 2025-04-29 17:44:05
+ * @LastEditTime: 2025-05-06 16:56:28
  */
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -21,9 +21,10 @@ export default defineConfig(({ mode }) => {
         lib: {
           entry: resolve(__dirname, "packages/index.js"), // 你的库的入口文件
           name: "TroyFlowEngine", // 暴露的全局变量
-          fileName: (format) => `troy-flow-engine.${format}.js`,
-          formats: ["es", "umd"], // 输出的格式
+          fileName: "troy-flow-engine",
+          // formats: ["es", "umd"], // 输出的格式
         },
+        cssCodeSplit: false,
         rollupOptions: {
           // 确保外部化处理那些你不想打包进库的依赖
           external: ["vue", "element-plus", "@element-plus/icons-vue"],
@@ -32,7 +33,7 @@ export default defineConfig(({ mode }) => {
             globals: {
               vue: "Vue",
               "element-plus": "ElementPlus",
-              "element-plus/icons-vue": "ElementPlusIconsVue",
+              "@element-plus/icons-vue": "ElementPlusIconsVue",
             },
           },
         },

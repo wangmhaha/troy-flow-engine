@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-27 15:03:16
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-06 10:11:12
+ * @LastEditTime: 2025-05-06 14:36:07
  -->
 <template>
   <div class="container">
@@ -19,7 +19,7 @@
 <script setup>
 import { TroyFlowEngine } from "../packages";
 
-const getUserList = async (deptId) => {
+const getUserList = async (deptId, { pageNum, pageSize }) => {
   // 模拟一个请求
   const data = await new Promise((resolve) => {
     setTimeout(() => {

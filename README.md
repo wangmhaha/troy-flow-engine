@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-27 15:03:16
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-06 11:41:08
+ * @LastEditTime: 2025-05-06 16:56:03
 -->
 
 # Troy 工作流引擎 web 设计器
@@ -18,7 +18,7 @@
 ### 安装
 
 ```bash
-pnpm install troy-flow-engine@next --save
+pnpm install troy-flow-engine --save
 ```
 
 ### 其他依赖
@@ -30,22 +30,14 @@ pnpm install element-plus --save
 pnpm install @element-plus/icons-vue --save
 ```
 
-### 引入
+### 快速使用
 
 ```js
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
-import ElementPlus from "element-plus";
-import "element-plus/dist/index.css";
 import { TroyFlowEngine } from "troy-flow-engine";
-createApp(App).use(router).use(ElementPlus).use(TroyFlowEngine).mount("#app");
-```
+import "troy-flow-engine/dist/troy-flow-engine.css";
 
-### 编辑模式
 
-```js
-<TroyFlowEngine
+<troy-flow-engine
   :getDeptTree="getDeptTree"
   :getUserList="getUserList"
   :getRoleList="getRoleList"
@@ -90,6 +82,7 @@ const getRoleList = async () => {
 const saveFlow = (data) => {
   console.log("data", data);
 };
+
 ```
 
 ### 属性

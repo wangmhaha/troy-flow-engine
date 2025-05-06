@@ -1,21 +1,23 @@
 {
   "name": "troy-flow-engine",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.8",
   "type": "module",
   "files": [
     "dist",
     "packages"
   ],
   "author": "wangmin",
-  "main": "./dist/troy-flow-engine.umd.js",
+  "main": "./dist/troy-flow-engine.umd.cjs",
   "module": "./dist/troy-flow-engine.js",
   "exports": {
     ".": {
       "import": "./dist/troy-flow-engine.js",
-      "require": "./dist/troy-flow-engine.umd.js"
-    }
+      "require": "./dist/troy-flow-engine.umd.cjs"
+    },
+    "./dist/troy-flow-engine.css": "./dist/troy-flow-engine.css"
   },
+  "style": "./dist/troy-flow-engine.css",
   "repository": {
     "type": "git",
     "url": "https://github.com/wangmhaha/troy-flow-engine.git"

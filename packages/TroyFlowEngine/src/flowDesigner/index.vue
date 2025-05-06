@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-27 15:21:23
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-06 09:51:40
+ * @LastEditTime: 2025-05-06 15:05:37
 -->
 <template>
   <div class="m-troyflow-designer">
@@ -56,6 +56,9 @@ import SubProcess from "./subProcess";
 import DataDetail from "./control/dataDetail.vue";
 import "@logicflow/core/lib/style/index.css";
 import "@logicflow/extension/lib/style/index.css";
+
+// 使用 name 属性定义组件名称
+const name = "troy-flow-engine";
 
 const emit = defineEmits(["on-save"]);
 

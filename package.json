@@ -16,6 +16,10 @@
       "require": "./dist/troy-flow-engine.umd.js"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wangmhaha/troy-flow-engine.git"
+  },
   "keywords": [
     "工作流",
     "流程设计器",

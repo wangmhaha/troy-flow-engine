@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-27 15:03:16
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-06 11:36:42
+ * @LastEditTime: 2025-05-06 11:41:08
 -->
 
 # Troy 工作流引擎 web 设计器
@@ -18,7 +18,7 @@
 ### 安装
 
 ```bash
-npm install snakerflow-designer-vue@next --save
+pnpm install troy-flow-engine@next --save
 ```
 
 ### 其他依赖
@@ -26,10 +26,8 @@ npm install snakerflow-designer-vue@next --save
 设计器依赖以下第三方库，如果工程中没有引入这些第三库将会无法正常使用，需自行安装。
 
 ```bash
-npm install @logicflow/core@^1.1.21 --save
-npm install @logicflow/extension@^1.1.21 --save
-npm install clipboard@^2.0.11 --save
-npm install vue-json-pretty@^2.1.1 --save
+pnpm install element-plus --save
+pnpm install @element-plus/icons-vue --save
 ```
 
 ### 引入

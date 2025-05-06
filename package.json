@@ -1,0 +1,47 @@
+{
+  "name": "troy-flow-engine",
+  "private": false,
+  "version": "0.0.1",
+  "type": "module",
+  "files": [
+    "dist",
+    "packages"
+  ],
+  "author": "wangmin",
+  "main": "./dist/troy-flow-engine.umd.js",
+  "module": "./dist/troy-flow-engine.js",
+  "exports": {
+    ".": {
+      "import": "./dist/troy-flow-engine.js",
+      "require": "./dist/troy-flow-engine.umd.js"
+    }
+  },
+  "keywords": [
+    "工作流",
+    "流程设计器",
+    "Web流程设计器",
+    "TroyFlow",
+    "TroyFlowEngine",
+    "Vue3",
+    "LogicFlow",
+    "ElementPlus"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:lib": "vite build --mode lib",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@logicflow/core": "^2.0.13",
+    "@logicflow/extension": "^2.0.17",
+    "element-plus": "^2.9.8",
+    "vue": "^3.5.13",
+    "vue-json-pretty": "^2.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.2",
+    "vite": "^6.3.1"
+  }
+}

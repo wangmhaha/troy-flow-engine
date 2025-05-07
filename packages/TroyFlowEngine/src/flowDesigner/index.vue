@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-27 15:21:23
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-07 17:04:54
+ * @LastEditTime: 2025-05-07 17:26:17
 -->
 <template>
   <div class="m-troyflow-designer">
@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, onMounted } from "vue";
+import { ref, defineProps, onMounted, watch } from "vue";
 import LogicFlow from "@logicflow/core";
 import {
   Snapshot,
@@ -252,6 +252,16 @@ const initDnDPanel = () => {
     },
   });
 };
+// 监听数据，如果数据发生变化，重新渲染流程图
+watch(
+  () => props.value,
+  (newVal) => {
+    lf.value.render(newVal);
+  },
+  {
+    deep: true,
+  }
+);
 
 onMounted(() => {
   initFlowDesigner();

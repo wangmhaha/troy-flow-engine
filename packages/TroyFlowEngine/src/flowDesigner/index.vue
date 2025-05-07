@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-27 15:21:23
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-06 15:05:37
+ * @LastEditTime: 2025-05-07 14:03:26
 -->
 <template>
   <div class="m-troyflow-designer">
@@ -275,12 +275,12 @@ const initEvent = () => {
   justify-content: flex-start;
 }
 #TROY-view {
-  width: calc(100% - 350px);
+  width: calc(100% - 450px);
   height: 100%;
   min-height: 800px;
 }
 .property-plane {
-  width: 350px;
+  width: 450px;
   height: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background: #fff;

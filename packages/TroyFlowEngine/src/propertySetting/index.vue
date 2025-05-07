@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-28 15:43:58
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-06 10:57:19
+ * @LastEditTime: 2025-05-07 14:55:38
 -->
 <template>
   <div class="m-property-setting">
@@ -20,6 +20,7 @@
         :getDeptTree="getDeptTree"
         :getUserList="getUserList"
         :getRoleList="getRoleList"
+        :currentNodeData="currentNodeData"
       />
     </div>
   </div>
@@ -30,6 +31,7 @@ import { ref, defineProps, watch } from "vue";
 const formValue = ref({});
 
 const emit = defineEmits(["changeNodeData"]);
+const currentNodeData = ref([]);
 
 const props = defineProps({
   nodeData: {
@@ -69,6 +71,8 @@ watch(
       type = type === "polyline" ? "edge" : type;
       const module = await import(`./${type}/index.vue`);
       currentComponent.value = module.default;
+      // 获取当前所有节点数据
+      currentNodeData.value = props.lf.getGraphData().nodes;
     } catch (err) {
       console.error("加载属性设置组件失败:", err);
       currentComponent.value = null;
@@ -97,6 +101,8 @@ const handleChange = (data) => {
       performType: data.performType,
       expireTime: data.expireTime,
       buttons: data.buttons,
+      rejectNode: data.rejectNode,
+      // rejectNodeList: data.rejectNodeList,
     });
   } else if (props.nodeData.type === "polyline") {
     props.lf.setProperties(props.nodeData.id, {

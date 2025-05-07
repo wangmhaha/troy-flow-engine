@@ -4,12 +4,15 @@
  * @Author: wangmin
  * @Date: 2025-04-27 15:21:23
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-07 14:03:26
+ * @LastEditTime: 2025-05-07 17:04:54
 -->
 <template>
   <div class="m-troyflow-designer">
-    <div id="TROY-view" />
-    <div class="property-plane">
+    <div
+      id="TROY-view"
+      :style="{ width: isReadOnly ? '100%' : 'calc(100% - 450px)' }"
+    />
+    <div class="property-plane" v-if="!isReadOnly">
       <PropertySetting
         :nodeData="currentClickNodeData"
         @changeNodeData="changeNodeData"
@@ -69,6 +72,7 @@ const props = defineProps([
   "getDeptTree",
   "getUserList",
   "getRoleList",
+  "isReadOnly",
 ]);
 // 当前流程实例对象
 const lf = ref(null);
@@ -109,18 +113,22 @@ const copyJsonContent = () => {
 const initFlowDesigner = () => {
   lf.value = new LogicFlow({
     container: document.querySelector("#TROY-view"),
-    plugins: [Menu, Control, Snapshot, DndPanel, SelectionSelect, Group],
+    plugins: props.isReadOnly
+      ? []
+      : [Menu, Control, Snapshot, DndPanel, SelectionSelect, Group],
     isSilentMode: false,
     grid: true,
   });
 
   // 注册自定义元素
   registerCustomNode();
-  initDnDPanel();
-  // 初始化节点事件
-  initEvent();
+  if (!props.isReadOnly) {
+    initDnDPanel();
+    // 初始化节点事件
+    initEvent();
+  }
 
-  lf.value.render();
+  lf.value.render(props.value);
 };
 
 const registerCustomNode = () => {

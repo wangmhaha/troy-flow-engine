@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-28 15:43:58
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-07 14:55:38
+ * @LastEditTime: 2025-05-07 16:27:21
 -->
 <template>
   <div class="m-property-setting">
@@ -72,7 +72,11 @@ watch(
       const module = await import(`./${type}/index.vue`);
       currentComponent.value = module.default;
       // 获取当前所有节点数据
-      currentNodeData.value = props.lf.getGraphData().nodes;
+      currentNodeData.value = props.lf
+        .getGraphData()
+        .nodes.filter(
+          (item) => item.type == "node:task" || item.type === "node:start"
+        );
     } catch (err) {
       console.error("加载属性设置组件失败:", err);
       currentComponent.value = null;

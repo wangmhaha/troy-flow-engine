@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-27 15:03:16
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-06 16:56:03
+ * @LastEditTime: 2025-05-07 17:07:19
 -->
 
 # Troy 工作流引擎 web 设计器
@@ -96,3 +96,4 @@ const saveFlow = (data) => {
 | getUserList     | 获取用户分页列表     | () => Promise  | --         | --     |
 | getRoleList     | 获取角色列表         | () => Promise  | --         | --     |
 | on-save         | 保存流程数据         | (data) => void | --         |        |
+| is-read-only    | 是否是自读模式       | boolean        | true/false | false  |

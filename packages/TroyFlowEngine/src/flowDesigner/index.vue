@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-27 15:21:23
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-14 16:39:04
+ * @LastEditTime: 2025-05-20 14:43:07
 -->
 <template>
   <div class="m-troyflow-designer">
@@ -51,11 +51,11 @@ import { ElMessage } from "element-plus";
 import PropertySetting from "../propertySetting/index.vue";
 import Start from "./start";
 import Task from "./task";
-import Decision from "./decision/index_bak";
-import End from "./end/index_bak";
+import Decision from "./decision";
+import End from "./end";
 import CustomNode from "./custom";
-import ForkNode from "./fork/index_bak";
-import JoinNode from "./join/index_bak";
+import ForkNode from "./fork";
+import JoinNode from "./join";
 import SubProcess from "./subProcess";
 import DataDetail from "./control/dataDetail.vue";
 import "@logicflow/core/lib/style/index.css";

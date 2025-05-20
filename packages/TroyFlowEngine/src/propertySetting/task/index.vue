@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-28 16:49:31
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-07 15:01:53
+ * @LastEditTime: 2025-05-15 11:46:35
 -->
 <template>
   <div>
@@ -17,9 +17,12 @@
           <slot name="form-item-task-form-key">
             <el-form-item label="节点表单">
               <el-select v-model="form.formKey" placeholder="请选择节点表单">
-                <el-option label="表单1" value="form1"></el-option>
-                <el-option label="表单2" value="form2"></el-option>
-                <el-option label="表单3" value="form3"></el-option>
+                <el-option
+                  v-for="item in formList"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id"
+                ></el-option>
               </el-select>
             </el-form-item>
           </slot>
@@ -205,6 +208,14 @@ const props = defineProps({
   getRoleList: {
     type: Function,
     default: async () => {},
+  },
+  getFormList: {
+    type: Function,
+    default: async () => {},
+  },
+  formList: {
+    type: Array,
+    default: () => [],
   },
   currentNodeData: {
     type: Array,

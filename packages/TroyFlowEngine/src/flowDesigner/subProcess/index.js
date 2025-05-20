@@ -4,9 +4,10 @@
  * @Author: wangmin
  * @Date: 2025-04-28 14:42:10
  * @LastEditors: wangmin
- * @LastEditTime: 2025-04-28 14:54:54
+ * @LastEditTime: 2025-05-20 14:16:01
  */
 import { GroupNode, GroupNodeModel } from "@logicflow/extension";
+import { nodeStyleHandle } from "../tool";
 
 class SubProcessView extends GroupNode {}
 class SubProcessModel extends GroupNodeModel {
@@ -33,6 +34,16 @@ class SubProcessModel extends GroupNodeModel {
     this.foldedWidth = 50;
     this.foldedHeight = 50;
     this.radius = 10;
+  }
+  getNodeStyle() {
+    const style = super.getNodeStyle();
+    const customStyle = nodeStyleHandle(this, style);
+    // 设置节点的基本样式
+    customStyle.fill = "#fff";
+    customStyle.stroke = "#000";
+    customStyle.strokeWidth = 2;
+
+    return customStyle;
   }
 }
 

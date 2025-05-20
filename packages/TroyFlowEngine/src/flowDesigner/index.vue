@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-27 15:21:23
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-07 17:26:17
+ * @LastEditTime: 2025-05-14 16:39:04
 -->
 <template>
   <div class="m-troyflow-designer">
@@ -19,6 +19,7 @@
         :getDeptTree="getDeptTree"
         :getUserList="getUserList"
         :getRoleList="getRoleList"
+        :getFormList="getFormList"
         :lf="lf"
       />
     </div>
@@ -50,11 +51,11 @@ import { ElMessage } from "element-plus";
 import PropertySetting from "../propertySetting/index.vue";
 import Start from "./start";
 import Task from "./task";
-import Decision from "./decision";
-import End from "./end";
+import Decision from "./decision/index_bak";
+import End from "./end/index_bak";
 import CustomNode from "./custom";
-import ForkNode from "./fork";
-import JoinNode from "./join";
+import ForkNode from "./fork/index_bak";
+import JoinNode from "./join/index_bak";
 import SubProcess from "./subProcess";
 import DataDetail from "./control/dataDetail.vue";
 import "@logicflow/core/lib/style/index.css";
@@ -72,6 +73,7 @@ const props = defineProps([
   "getDeptTree",
   "getUserList",
   "getRoleList",
+  "getFormList",
   "isReadOnly",
 ]);
 // 当前流程实例对象
@@ -279,6 +281,18 @@ const initEvent = () => {
   });
   eventCenter.on("edge:click", (args) => {
     currentClickNodeData.value = args.data;
+  });
+  /**
+   * 点击空白区域，获取当前开始节点
+   */
+  eventCenter.on("blank:click", (e) => {
+    const data = lf.value.getGraphData();
+    const startNode = data.nodes.find((node) => node.type === "node:start");
+    if (startNode) {
+      currentClickNodeData.value = { ...startNode };
+    } else {
+      currentClickNodeData.value = null;
+    }
   });
 };
 </script>

@@ -4,16 +4,16 @@
  * @Author: wangmin
  * @Date: 2025-04-28 14:14:03
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-20 11:49:26
+ * @LastEditTime: 2025-05-20 11:44:33
  */
-import { h, RectNode, RectNodeModel } from "@logicflow/core";
+import { h, PolygonNode, PolygonNodeModel } from "@logicflow/core";
 import { nodeStyleHandle } from "../tool";
 
-class DecisionModel extends RectNodeModel {
+class DecisionModel extends PolygonNodeModel {
   static extendKey = "DecisionModel";
   constructor(data, graphModel) {
     if (!data.text) {
-      data.text = "条件判断";
+      data.text = "";
     }
     if (data.text && typeof data.text === "string") {
       data.text = {
@@ -23,8 +23,12 @@ class DecisionModel extends RectNodeModel {
       };
     }
     super(data, graphModel);
-    this.width = 150;
-    this.height = 60;
+    this.points = [
+      [25, 0],
+      [50, 25],
+      [25, 50],
+      [0, 25],
+    ];
   }
 
   getNodeStyle() {
@@ -32,34 +36,31 @@ class DecisionModel extends RectNodeModel {
     const customStyle = nodeStyleHandle(this, style);
     // 设置节点的基本样式
     customStyle.fill = "#fff";
-    customStyle.stroke = "#E8E8EF";
+    customStyle.stroke = "#000";
     customStyle.strokeWidth = 2;
 
     return customStyle;
   }
-
-  // 自定义文本样式
-  getTextStyle() {
-    const style = super.getTextStyle();
-    style.textAlign = "center";
-    style.fontSize = 12;
-    return style;
-  }
 }
 
-class DecisionView extends RectNode {
+class DecisionView extends PolygonNode {
   static extendKey = "DecisionNode";
 
-  // 渲染左侧图标
+  // 渲染图标
   getLabelShape() {
     const { model } = this.props;
     const { x, y, width, height } = model;
 
+    console.log("x", x);
+    console.log("y", y);
+    console.log("width", width);
+    console.log("height", height);
+
     return h(
       "svg",
       {
-        x: x - width / 2 + 5,
-        y: y - height / 2 + 5,
+        x,
+        y,
         width: 24,
         height: 24,
         viewBox: "0 0 24 24",
@@ -75,41 +76,29 @@ class DecisionView extends RectNode {
     );
   }
 
-  // 渲染底部蓝色边框
-  getBottomBorderShape() {
-    const { model } = this.props;
-    const { x, y, width, height } = model;
-
-    return h("rect", {
-      x: x - width / 2,
-      y: y + height / 2 - 4,
-      width,
-      height: 4,
-      fill: "#1890FF", // 蓝色底部边框
-    });
-  }
-
   getShape() {
     const { model } = this.props;
-    const { x, y, width, height } = model;
+    const { x, y, width, height, points } = model;
     const style = model.getNodeStyle();
-
-    return h("g", {}, [
-      // 主矩形
-      h("rect", {
+    return h(
+      "g",
+      {
+        transform: `matrix(1 0 0 1 ${x - width / 2} ${y - height / 2})`,
+      },
+      h("polygon", {
         ...style,
-        x: x - width / 2,
-        y: y - height / 2,
-        rx: 4,
-        ry: 4,
-        width,
-        height,
+        x,
+        y,
+        points,
       }),
-      // 底部蓝色边框
-      this.getBottomBorderShape(),
       // 左侧图标
-      this.getLabelShape(),
-    ]);
+      // this.getLabelShape()
+      h("path", {
+        // ...style,
+        d: "m 16,15 7.42857142857143,9.714285714285715 -7.42857142857143,9.714285714285715 3.428571428571429,0 5.714285714285715,-7.464228571428572 5.714285714285715,7.464228571428572 3.428571428571429,0 -7.42857142857143,-9.714285714285715 7.42857142857143,-9.714285714285715 -3.428571428571429,0 -5.714285714285715,7.464228571428572 -5.714285714285715,-7.464228571428572 -3.428571428571429,0 z",
+        fill: "#FFB400",
+      })
+    );
   }
 }
 

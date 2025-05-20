@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-27 15:03:16
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-07 17:07:19
+ * @LastEditTime: 2025-05-14 16:43:12
 -->
 
 # Troy 工作流引擎 web 设计器
@@ -41,6 +41,7 @@ import "troy-flow-engine/dist/troy-flow-engine.css";
   :getDeptTree="getDeptTree"
   :getUserList="getUserList"
   :getRoleList="getRoleList"
+  :getFormList="getFormList"
   @on-save="saveFlow"
 />
 
@@ -79,6 +80,16 @@ const getRoleList = async () => {
   return data;
 };
 
+const getFormList = async () => {
+  // 模拟一个请求
+  const data = await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve([]);
+    }, 1000);
+  });
+  return data;
+}
+
 const saveFlow = (data) => {
   console.log("data", data);
 };
@@ -95,5 +106,6 @@ const saveFlow = (data) => {
 | getDeptTree     | 获取部门树数据       | () => Promise  | --         | --     |
 | getUserList     | 获取用户分页列表     | () => Promise  | --         | --     |
 | getRoleList     | 获取角色列表         | () => Promise  | --         | --     |
+| getFormList     | 获取表单列表         | () => Promise  | --         | --     |
 | on-save         | 保存流程数据         | (data) => void | --         |        |
 | is-read-only    | 是否是自读模式       | boolean        | true/false | false  |

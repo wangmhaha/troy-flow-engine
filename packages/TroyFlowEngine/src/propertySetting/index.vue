@@ -4,7 +4,7 @@
  * @Author: wangmin
  * @Date: 2025-04-28 15:43:58
  * @LastEditors: wangmin
- * @LastEditTime: 2025-05-07 16:27:21
+ * @LastEditTime: 2025-05-15 13:41:02
 -->
 <template>
   <div class="m-property-setting">
@@ -20,6 +20,8 @@
         :getDeptTree="getDeptTree"
         :getUserList="getUserList"
         :getRoleList="getRoleList"
+        :getFormList="getFormList"
+        :formList="formList"
         :currentNodeData="currentNodeData"
       />
     </div>
@@ -27,9 +29,9 @@
 </template>
 
 <script setup>
-import { ref, defineProps, watch } from "vue";
+import { ref, defineProps, watch, onMounted } from "vue";
 const formValue = ref({});
-
+const formList = ref([]);
 const emit = defineEmits(["changeNodeData"]);
 const currentNodeData = ref([]);
 
@@ -47,6 +49,10 @@ const props = defineProps({
     default: async () => {},
   },
   getRoleList: {
+    type: Function,
+    default: async () => {},
+  },
+  getFormList: {
     type: Function,
     default: async () => {},
   },
@@ -85,6 +91,14 @@ watch(
   { immediate: true, deep: true }
 );
 
+onMounted(() => {
+  if (props.getFormList) {
+    props.getFormList().then((res) => {
+      formList.value = res;
+    });
+  }
+});
+
 // 处理节点数据更新
 const handleChange = (data) => {
   if (props.nodeData.type === "node:start") {
@@ -92,6 +106,7 @@ const handleChange = (data) => {
       displayName: data.displayName,
       preInterceptors: data.preInterceptors,
       postInterceptors: data.postInterceptors,
+      formKey: data.formKey,
     });
   } else if (props.nodeData.type === "node:task") {
     props.lf.setProperties(props.nodeData.id, {
